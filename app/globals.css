@@ -1,3 +1,8 @@
 body {
-  background: linear-gradient(135deg,oklch(.95 .02 240)0%,oklch(.98 .01 200)100%);
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    oklch(0.95 0.02 240) 0%,
+    oklch(0.98 0.01 200) 100%
+  );
 }
