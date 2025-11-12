@@ -1,19 +1,24 @@
+.search-form {
+  display: flex;
+  align-items: center;
+  margin: 0 50px;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0 2rem;
+}
+
 .search-input {
   /* Layout & sizing */
   height: 2.25rem; /* h-9 */
   width: 100%; /* w-full */
   min-width: 0; /* min-w-0 */
-  padding-left: 2.5rem; /* pl-10 */
-  padding-right: 1rem; /* pr-4 */
-  padding-top: 0.75rem; /* py-3 */
-  padding-bottom: 0.75rem;
+  padding: 0rem 1rem;
   border-radius: 1rem; /* rounded-2xl */
 
   /* Typography & appearance */
   font-size: 1.125rem; /* text-lg */
   color: #222;
   background-color: color-mix(in srgb, oklch(0.99 0.005 220) 80%, transparent);
-  backdrop-filter: blur(8px);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   border: none;
   outline: none;
@@ -53,7 +58,10 @@
 }
 
 .search-button {
-  display: inline-flex;
+  border: none;
+  padding: 0;
+  width: 2.25rem;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem; /* gap-2 */
@@ -61,14 +69,14 @@
   font-size: 0.875rem; /* text-sm */
   font-weight: 500; /* font-medium */
   height: 2.25rem; /* h-9 */
-  padding: 0.75rem 1.5rem; /* py-3 px-6 */
-  border-radius: 1rem; /* rounded-2xl */
+  border-radius: 50%; /* rounded-2xl */
   background-color: oklch(0.6 0.15 240);
   color: oklch(0.98 0.01 200);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   outline: none;
   transition: all 0.3s ease;
   transform: scale(1);
+  flex-shrink: 0;
 }
 
 .search-button:hover {
