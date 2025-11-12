@@ -1,3 +1,5 @@
+"use client";
+
 import { type FC } from "react";
 import SearchBarPresenter from "./presenter/SearchBar.presenter";
 
