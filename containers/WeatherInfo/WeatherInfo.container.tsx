@@ -7,8 +7,6 @@ const WeatherInfoContainer: FC = () => {
   return (
     <>
       <WeatherInitPresenter />
-      <WeatherResultPresenter />
-      <WeatherErrorPresenter />
     </>
   );
 };
