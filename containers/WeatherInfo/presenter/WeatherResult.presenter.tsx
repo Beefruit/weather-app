@@ -5,11 +5,17 @@ import { Droplets, Wind, Thermometer } from "lucide-react";
 
 const cx = classNames.bind(styles);
 
-const WeatherResultPresenter: FC = () => {
+interface IWeatherResultPresenterProps {
+  searchQuery: string;
+}
+
+const WeatherResultPresenter: FC<IWeatherResultPresenterProps> = ({
+  searchQuery,
+}) => {
   return (
     <div className={cx("home-result")}>
       <div className={cx("location")}>
-        <h2 className={cx("city")}>파리</h2>
+        <h2 className={cx("city")}>{searchQuery}</h2>
         <h2 className={cx("temperature")}>22&deg;C</h2>
         <p className={cx("weather")}>맑음</p>
       </div>

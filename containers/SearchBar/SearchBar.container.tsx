@@ -2,9 +2,18 @@
 
 import { type FC } from "react";
 import SearchBarPresenter from "./presenter/SearchBar.presenter";
+import { useSearchBar } from "./hook/useSearchBar";
 
 const SearchBarContainer: FC = () => {
-  return <SearchBarPresenter />;
+  const { searchValue, onChangeSearchValue, onSubmitSearch } = useSearchBar();
+
+  return (
+    <SearchBarPresenter
+      searchValue={searchValue}
+      onChangeSearchValue={onChangeSearchValue}
+      onSubmitSearch={onSubmitSearch}
+    />
+  );
 };
 
 export default SearchBarContainer;
