@@ -7,14 +7,17 @@ import WeatherErrorPresenter from "./presenter/WeatherError.presenter";
 import { useWeatherInfo } from "./hook/useWeatherInfo";
 
 const WeatherInfoContainer: FC = () => {
-  const { searchQuery } = useWeatherInfo();
+  const { searchQuery, weatherData } = useWeatherInfo();
 
   return (
     <>
       {searchQuery.length === 0 ? (
         <WeatherInitPresenter />
       ) : (
-        <WeatherResultPresenter searchQuery={searchQuery} />
+        <WeatherResultPresenter
+          searchQuery={searchQuery}
+          weatherData={weatherData}
+        />
       )}
     </>
   );
