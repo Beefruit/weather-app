@@ -17,14 +17,8 @@ export const getGeocodeApi = async (searchQuery: string) => {
   return data;
 };
 
-export const getWeatherApi = async ({
-  lat,
-  lon,
-}: {
-  lat: number;
-  lon: number;
-}) => {
-  const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`, {
+export const getWeatherApi = async (lat: number, lon: number) => {
+  const res = await fetch(`/api/weather/${lat}/${lon}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

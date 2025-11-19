@@ -3,16 +3,17 @@
 import { useState, useEffect } from "react";
 import { useSearchStore } from "@/store/searchQuery.store";
 import { getGeocodeApi, getWeatherApi } from "../api/weatherInfo.api";
+import { formatWeatherToKorean } from "../domain";
 
 export const useWeatherInfo = () => {
   const { searchQuery } = useSearchStore();
-  const [weatherInfo, setWeatherInfo] = useState<{
+  const [weatherData, setWeatherData] = useState<{
     temperature: number;
-    weather: string;
     humidity: number;
-    windSpeed: number;
     feelsLike: number;
-    iconUrl: string;
+    weather: string;
+    weatherIcon: string;
+    windSpeed: number;
   } | null>(null);
 
   useEffect(() => {
@@ -23,21 +24,23 @@ export const useWeatherInfo = () => {
 
       const data = await getGeocodeApi(searchQuery);
 
-      const weatherData = await getWeatherApi({ lat: data.lat, lon: data.lng });
+      const weatherData = await getWeatherApi(data.lat, data.lng);
 
-      setWeatherInfo({
-        temperature: weatherData.daily[0].temp.eve,
-        weather: weatherData.daily[0].weather[0].main,
-        humidity: weatherData.daily[0].humidity,
-        windSpeed: weatherData.daily[0].wind_speed,
-        feelsLike: weatherData.daily[0].feels_like.eve,
-        iconUrl: `http://openweathermap.org/img/wn/${weatherData.daily[0].weather[0].icon}.png`,
+      console.log(weatherData);
+
+      setWeatherData({
+        temperature: weatherData.current.temp,
+        humidity: weatherData.current.humidity,
+        feelsLike: weatherData.current.feels_like,
+        weather: formatWeatherToKorean(weatherData.current.weather[0].main),
+        weatherIcon: weatherData.current.weather[0].icon,
+        windSpeed: weatherData.current.wind_speed,
       });
     })();
   }, [searchQuery]);
 
   return {
     searchQuery,
-    weatherInfo,
+    weatherData,
   };
 };
