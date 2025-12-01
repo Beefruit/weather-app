@@ -1,0 +1,23 @@
+.progressbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 6.4rem;
+  margin: 0 auto;
+  gap: 0.8rem;
+  margin-bottom: 3.2rem;
+}
+
+.progress {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+
+.progress.active {
+  width: 3.2rem;
+  border-radius: 0.5rem;
+  background-color: #00a2ce;
+}

@@ -14,10 +14,12 @@ const WeatherInfoContainer: FC = () => {
       {searchQuery.length === 0 ? (
         <WeatherInitPresenter />
       ) : (
-        <WeatherResultPresenter
-          searchQuery={searchQuery}
-          weatherData={weatherData}
-        />
+        <>
+          <WeatherResultPresenter
+            searchQuery={searchQuery}
+            weatherData={weatherData}
+          />
+        </>
       )}
     </>
   );
