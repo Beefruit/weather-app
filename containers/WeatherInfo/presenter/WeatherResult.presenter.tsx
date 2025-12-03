@@ -15,16 +15,18 @@ interface IWeatherResultPresenterProps {
     weatherIcon: string;
     windSpeed: number;
   } | null;
+  locationName: string | null;
 }
 
 const WeatherResultPresenter: FC<IWeatherResultPresenterProps> = ({
   searchQuery,
   weatherData,
+  locationName,
 }) => {
   return (
     <div className={cx("home-result")}>
       <div className={cx("location")}>
-        <h2 className={cx("city")}>{searchQuery}</h2>
+        <h2 className={cx("city")}>{searchQuery || locationName}</h2>
         <img
           src={`https://openweathermap.org/img/wn/${weatherData?.weatherIcon}@2x.png`}
           alt={weatherData?.weather}
