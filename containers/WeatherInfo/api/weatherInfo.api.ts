@@ -49,6 +49,5 @@ export const getReverseGeocodeApi = async (lat: number, lon: number) => {
   const data = await res.json();
   const address = data.plus_code.compound_code.split(" ").slice(2).join(" ");
 
-  console.log("reverse geocode address:", address);
   return address;
 };

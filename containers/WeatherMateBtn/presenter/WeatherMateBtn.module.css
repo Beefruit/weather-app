@@ -1,0 +1,24 @@
+.weathermate-btn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  font-size: 2.4rem;
+  font-weight: bold;
+  width: 32rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: background-color 0.3s ease;
+}
+
+.weathermate-btn:hover {
+  background-color: #357abd;
+}

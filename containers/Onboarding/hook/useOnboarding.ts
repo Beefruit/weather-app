@@ -6,6 +6,7 @@ import { useOnboardingStore } from "@/store/onboarding.store";
 
 export const useOnboarding = () => {
   const STYLE_OPTIONS = {
+    gender: ["여성", "남성"],
     style: ["스포티", "캐주얼", "포멀", "아웃도어", "댄디"],
     favoriteColor: ["베이지", "다크", "화이트", "파스텔", "비비드"],
     tempSensitivity: ["매우 추움", "추움", "보통", "더움", "매우 더움"],
@@ -15,6 +16,7 @@ export const useOnboarding = () => {
   const [step, setStep] = useState(1);
 
   const {
+    setStyleOptionsGender,
     setStyleOptionsStyle,
     setStyleOptionsFavoriteColor,
     setStyleOptionsTempSensitivity,
@@ -22,12 +24,15 @@ export const useOnboarding = () => {
 
   const onClickOption = (option: string) => {
     if (step === 1) {
-      setStyleOptionsStyle(option);
+      setStyleOptionsGender(option);
       setStep(2);
     } else if (step === 2) {
-      setStyleOptionsFavoriteColor(option);
+      setStyleOptionsStyle(option);
       setStep(3);
     } else if (step === 3) {
+      setStyleOptionsFavoriteColor(option);
+      setStep(4);
+    } else if (step === 4) {
       setStyleOptionsTempSensitivity(option);
       router.push("/");
     }
