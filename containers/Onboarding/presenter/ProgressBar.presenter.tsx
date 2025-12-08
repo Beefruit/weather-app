@@ -17,6 +17,7 @@ const ProgressbarPresenter: FC<IProgressbarPresenterProps> = ({ step }) => {
       <span className={cx("progress", "step1", step === 1 && "active")} />
       <span className={cx("progress", "step2", step === 2 && "active")} />
       <span className={cx("progress", "step3", step === 3 && "active")} />
+      <span className={cx("progress", "step4", step === 4 && "active")} />
     </div>
   );
 };

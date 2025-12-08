@@ -16,7 +16,7 @@ const Step1Presenter: FC<IStep1PresenterProps> = ({
 }) => {
   return (
     <div className={cx("step-container")}>
-      <h2 className={cx("step-title")}>당신의 스타일은?</h2>
+      <h2 className={cx("step-title")}>당신의 온도 민감도는?</h2>
       <ul className={cx("style-list")}>
         {options.map((option) => (
           <li

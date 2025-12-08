@@ -1,12 +1,12 @@
 "use client";
 
-import { use, type FC } from "react";
+import { type FC } from "react";
 import WeatherMatePresenter from "./presenter/WeatherMate.presenter";
 import { useWeatherMate } from "./hook/useWeatherMate";
 
 const WeatherMateContainer: FC = () => {
-  useWeatherMate();
-  return <WeatherMatePresenter />;
+  const { isOpen, onCloseBtn } = useWeatherMate();
+  return <WeatherMatePresenter isOpen={isOpen} onCloseBtn={onCloseBtn} />;
 };
 
 export default WeatherMateContainer;

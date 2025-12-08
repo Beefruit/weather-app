@@ -2,7 +2,8 @@
 
 import { create } from "zustand";
 
-interface IStyleOptions {
+export interface IStyleOptions {
+  gender: string;
   style: string;
   favoriteColor: string;
   tempSensitivity: string;
@@ -10,7 +11,7 @@ interface IStyleOptions {
 
 interface IOnboardingStore {
   styleOptions: IStyleOptions;
-
+  setStyleOptionsGender: (gender: string) => void;
   setStyleOptionsStyle: (style: string) => void;
   setStyleOptionsFavoriteColor: (style: string) => void;
   setStyleOptionsTempSensitivity: (style: string) => void;
@@ -18,11 +19,16 @@ interface IOnboardingStore {
 
 export const useOnboardingStore = create<IOnboardingStore>((set) => ({
   styleOptions: {
+    gender: "",
     style: "",
     favoriteColor: "",
     tempSensitivity: "",
   },
 
+  setStyleOptionsGender: (gender: string) =>
+    set((state) => ({
+      styleOptions: { ...state.styleOptions, gender },
+    })),
   setStyleOptionsStyle: (style: string) =>
     set((state) => ({
       styleOptions: { ...state.styleOptions, style },
