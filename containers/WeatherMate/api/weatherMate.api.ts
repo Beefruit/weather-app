@@ -22,8 +22,6 @@ export const postWeatherMate = async (
       weatherData,
     }),
   });
-  const data = await response.json();
-
-  console.log("data:", data);
-  return data;
+  const { result } = await response.json();
+  return result;
 };
