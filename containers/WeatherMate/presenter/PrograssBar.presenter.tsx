@@ -14,6 +14,7 @@ const ProgressbarPresenter: FC = () => {
       <span className={cx("progress", "step2")} />
       <span className={cx("progress", "step3")} />
       <span className={cx("progress", "step4")} />
+      <span className={cx("progress", "step5")} />
     </div>
   );
 };
