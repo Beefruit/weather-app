@@ -37,3 +37,20 @@
   background-color: #00a2ce;
   color: #fff;
 }
+
+.style-list--mini {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.style-list--mini .style-item {
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .style-list--mini {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

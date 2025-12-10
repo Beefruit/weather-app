@@ -17,7 +17,7 @@ const Step1Presenter: FC<IStep1PresenterProps> = ({
   return (
     <div className={cx("step-container")}>
       <h2 className={cx("step-title")}>당신의 스타일은?</h2>
-      <ul className={cx("style-list")}>
+      <ul className={cx("style-list", "style-list--mini")}>
         {options.map((option) => (
           <li
             key={option}
@@ -25,7 +25,6 @@ const Step1Presenter: FC<IStep1PresenterProps> = ({
             onClick={() => onClickOption(option)}
           >
             {option}
-            <ArrowRight />
           </li>
         ))}
       </ul>

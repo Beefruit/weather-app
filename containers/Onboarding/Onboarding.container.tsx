@@ -10,7 +10,7 @@ import ProgressbarPresenter from "./presenter/ProgressBar.presenter";
 import { useOnboarding } from "./hook/useOnboarding";
 
 const OnboardingContainer: FC = () => {
-  const { step, onClickOption, STYLE_OPTIONS } = useOnboarding();
+  const { step, onClickOption, STYLE_OPTIONS, styleOptions } = useOnboarding();
 
   return (
     <>
@@ -23,7 +23,11 @@ const OnboardingContainer: FC = () => {
       )}
       {step === 2 && (
         <Step2Presenter
-          options={STYLE_OPTIONS.style}
+          options={
+            STYLE_OPTIONS.style[
+              styleOptions.gender === "남성" ? "man" : "woman"
+            ]
+          }
           onClickOption={onClickOption}
         />
       )}
