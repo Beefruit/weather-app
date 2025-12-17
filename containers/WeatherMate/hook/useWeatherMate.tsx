@@ -10,7 +10,8 @@ import { IOutfitData } from "../types";
 export const useWeatherMate = () => {
   const router = useRouter();
   const [outfitList, setOutfitList] = useState<IOutfitData[]>([]);
-  const { isOpen, setIsOpen } = useWeatherMateModalStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const { isOpen, setIsOpen, weatherData } = useWeatherMateModalStore();
   const { styleOptions } = useOnboardingStore();
 
   const onCloseBtn = () => {
@@ -18,7 +19,7 @@ export const useWeatherMate = () => {
   };
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isOpen || outfitList.length > 0) {
       return;
     }
 
@@ -36,23 +37,26 @@ export const useWeatherMate = () => {
 
     (async () => {
       try {
-        const result = await postWeatherMate(styleOptions, {
-          temperature: 22,
-          humidity: 60,
-          feelsLike: 21,
-          weather: "맑음",
-          windspeed: 3.5,
-        });
+        setIsLoading(true);
+
+        if (!weatherData) {
+          return;
+        }
+
+        const result = await postWeatherMate(styleOptions, weatherData);
         setOutfitList(result["outfit_suggestions"]);
       } catch (error) {
         console.error("Failed to generate WeatherMate recommendation:", error);
+      } finally {
+        setIsLoading(false);
       }
     })();
-  }, [isOpen]);
+  }, [isOpen, weatherData]);
 
   return {
     isOpen,
     onCloseBtn,
     outfitList,
+    isLoading,
   };
 };

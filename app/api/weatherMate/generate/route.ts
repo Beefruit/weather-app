@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   const { style, favoriteColor, tempSensitivity, weatherData } =
     await request.json();
 
-  const { temperature, humidity, feelsLike, weather, windspeed } = weatherData;
+  const { temperature, humidity, feelsLike, weather, windSpeed } = weatherData;
 
   const systemMessage = `너는 날씨에 맞는 옷차림을 추천해주는 스타일리스트야.
 반드시 순수 JSON 문자열만 응답해.
@@ -42,13 +42,13 @@ export async function POST(request: NextRequest) {
 - 습도: ${humidity}%
 - 체감 온도: ${feelsLike}°C
 - 날씨 상태: ${weather}
-- 풍속: ${windspeed}Km/h
+- 풍속: ${windSpeed}Km/h
 
 이 정보를 바탕으로 사용자가 편안하고 스타일리시하게 느낄 수 있는 옷차림을 추천해 주세요. 계절과 날씨에 맞는 소재와 색상을 고려하여 구체적인 아이템을 제안해 주세요.`;
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-5.1",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",

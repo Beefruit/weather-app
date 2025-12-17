@@ -9,7 +9,7 @@ export const postWeatherMate = async (
     humidity: number;
     feelsLike: number;
     weather: string;
-    windspeed: number;
+    windSpeed: number;
   }
 ) => {
   const response = await fetch("/api/weatherMate/generate", {

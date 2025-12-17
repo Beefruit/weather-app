@@ -8,20 +8,40 @@ import {
   getWeatherApi,
 } from "../api/weatherInfo.api";
 import { formatWeatherToKorean } from "../domain";
+import { useWeatherMateModalStore } from "@/store/weatherMateModal.store";
+
+interface IWeatherData {
+  temperature: number;
+  humidity: number;
+  feelsLike: number;
+  weather: string;
+  weatherIcon: string;
+  windSpeed: number;
+}
 
 export const useWeatherInfo = () => {
   const { searchQuery } = useSearchStore();
-  const [weatherData, setWeatherData] = useState<{
-    temperature: number;
-    humidity: number;
-    feelsLike: number;
-    weather: string;
-    weatherIcon: string;
-    windSpeed: number;
-  } | null>(null);
+  const {
+    setWeatherData: setWeatherDataStore,
+    setIsWeatherLoading,
+    setIsWeatherError,
+  } = useWeatherMateModalStore();
+  const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
+
   const [locationName, setLocationName] = useState<string | null>(null);
   const [isLocationError, setIsLocationError] = useState(false);
   const [isSearchError, setIsSearchError] = useState(false);
+
+  const storeWeatherData = (weatherData: IWeatherData) => {
+    setWeatherData(weatherData);
+    setWeatherDataStore({
+      temperature: weatherData.temperature,
+      humidity: weatherData.humidity,
+      feelsLike: weatherData.feelsLike,
+      weather: weatherData.weather,
+      windSpeed: weatherData.windSpeed,
+    });
+  };
 
   useEffect(() => {
     if (searchQuery.length === 0) {
@@ -29,11 +49,14 @@ export const useWeatherInfo = () => {
     }
     (async () => {
       try {
+        setIsWeatherLoading(true);
+        setIsWeatherError(false);
+
         const { lat, lng } = await getGeocodeApi(searchQuery);
 
         const weatherData = await getWeatherApi(lat, lng);
 
-        setWeatherData({
+        storeWeatherData({
           temperature: weatherData.current.temp,
           humidity: weatherData.current.humidity,
           feelsLike: weatherData.current.feels_like,
@@ -44,9 +67,13 @@ export const useWeatherInfo = () => {
 
         if (isSearchError) {
           setIsSearchError(false);
+          setIsWeatherError(false);
         }
       } catch (error) {
         setIsSearchError(true);
+        setIsWeatherError(true);
+      } finally {
+        setIsWeatherLoading(false);
       }
     })();
   }, [searchQuery]);
@@ -54,27 +81,36 @@ export const useWeatherInfo = () => {
   useEffect(() => {
     (async () => {
       if (navigator.geolocation) {
+        setIsWeatherLoading(true);
+        setIsWeatherError(false);
+
         navigator.geolocation.getCurrentPosition(
           async (position) => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
+            try {
+              const lat = position.coords.latitude;
+              const lng = position.coords.longitude;
 
-            const weatherData = await getWeatherApi(lat, lng);
+              const weatherData = await getWeatherApi(lat, lng);
 
-            const address = await getReverseGeocodeApi(lat, lng);
+              const address = await getReverseGeocodeApi(lat, lng);
 
-            setLocationName(address);
+              setLocationName(address);
 
-            setWeatherData({
-              temperature: weatherData.current.temp,
-              humidity: weatherData.current.humidity,
-              feelsLike: weatherData.current.feels_like,
-              weather: formatWeatherToKorean(
-                weatherData.current.weather[0].main
-              ),
-              weatherIcon: weatherData.current.weather[0].icon,
-              windSpeed: weatherData.current.wind_speed,
-            });
+              storeWeatherData({
+                temperature: weatherData.current.temp,
+                humidity: weatherData.current.humidity,
+                feelsLike: weatherData.current.feels_like,
+                weather: formatWeatherToKorean(
+                  weatherData.current.weather[0].main
+                ),
+                weatherIcon: weatherData.current.weather[0].icon,
+                windSpeed: weatherData.current.wind_speed,
+              });
+            } catch (e) {
+              setIsWeatherError(true);
+            } finally {
+              setIsWeatherLoading(false);
+            }
           },
           (error) => {
             console.error("Error getting location:", error);
