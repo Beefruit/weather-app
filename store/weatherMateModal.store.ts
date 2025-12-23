@@ -22,6 +22,9 @@ interface IWeatherMateModalStore {
 
   isWeatherError: boolean;
   setIsWeatherError: (v: boolean) => void;
+
+  scheduleType: string;
+  setScheduleType: (type: string) => void;
 }
 
 export const useWeatherMateModalStore = create<IWeatherMateModalStore>(
@@ -37,5 +40,8 @@ export const useWeatherMateModalStore = create<IWeatherMateModalStore>(
 
     isWeatherError: false,
     setIsWeatherError: (v) => set({ isWeatherError: v }),
+
+    scheduleType: "",
+    setScheduleType: (type: string) => set({ scheduleType: type }),
   })
 );

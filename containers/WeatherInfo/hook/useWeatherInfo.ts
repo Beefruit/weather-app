@@ -114,6 +114,8 @@ export const useWeatherInfo = () => {
           },
           (error) => {
             console.error("Error getting location:", error);
+            setIsLocationError(true);
+            setIsWeatherLoading(false);
           }
         );
       }

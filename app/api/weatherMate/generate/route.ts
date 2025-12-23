@@ -7,7 +7,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(request: NextRequest) {
-  const { style, favoriteColor, tempSensitivity, weatherData } =
+  const { style, favoriteColor, tempSensitivity, weatherData, scheduleType } =
     await request.json();
 
   const { temperature, humidity, feelsLike, weather, windSpeed } = weatherData;
@@ -44,7 +44,9 @@ export async function POST(request: NextRequest) {
 - 날씨 상태: ${weather}
 - 풍속: ${windSpeed}Km/h
 
-이 정보를 바탕으로 사용자가 편안하고 스타일리시하게 느낄 수 있는 옷차림을 추천해 주세요. 계절과 날씨에 맞는 소재와 색상을 고려하여 구체적인 아이템을 제안해 주세요.`;
+사용자의 오늘 일정은 "${scheduleType}"입니다.
+
+이 정보를 바탕으로 사용자가 편안하고 스타일리시하게 느낄 수 있는 옷차림을 여러 개 추천해 주세요. 계절과 날씨에 맞는 소재와 색상을 고려하여 구체적인 아이템을 제안해 주세요.`;
 
   try {
     const completion = await openai.chat.completions.create({

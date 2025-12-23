@@ -1,0 +1,46 @@
+.weathermate-btn {
+  width: 100%;
+  min-height: 15rem;
+  padding: 2rem;
+  background-color: transparent;
+  border: 1px solid #9f9f9f;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 4rem;
+  background: #14a1c9;
+  color: #fff;
+}
+
+.label {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.weathermate-btn[data-type="work"] .icon-circle {
+  background: #14a1c9;
+}
+.weathermate-btn[data-type="exercise"] .icon-circle {
+  background: #f2a14a;
+}
+.weathermate-btn[data-type="date"] .icon-circle {
+  background: #9b5aa3;
+}
+.weathermate-btn[data-type="formal"] .icon-circle {
+  background: #66b07d;
+}
+.weathermate-btn[data-type="outdoor"] .icon-circle {
+  background: #7e86d8;
+}

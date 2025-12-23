@@ -10,7 +10,8 @@ export const postWeatherMate = async (
     feelsLike: number;
     weather: string;
     windSpeed: number;
-  }
+  },
+  scheduleType: string
 ) => {
   const response = await fetch("/api/weatherMate/generate", {
     method: "POST",
@@ -20,6 +21,7 @@ export const postWeatherMate = async (
     body: JSON.stringify({
       ...styleData,
       weatherData,
+      scheduleType,
     }),
   });
   const { result } = await response.json();
