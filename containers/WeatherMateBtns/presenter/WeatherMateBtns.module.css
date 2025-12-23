@@ -1,0 +1,15 @@
+.weathermate-btns {
+  padding: 0 2rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.btns-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}

@@ -5,7 +5,6 @@ import { createPortal } from "react-dom";
 import Modal from "@/components/modal/Modal";
 import classNames from "classnames/bind";
 import styles from "./WeatherMate.module.css";
-import ProgressbarPresenter from "./PrograssBar.presenter";
 import { IOutfitData } from "../types";
 import { formatTypeToInitial, formatTypeToKorean } from "../domain";
 import LoadingPresenter from "./Loading.presenter";
@@ -16,6 +15,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "./WeatherMateSwiper.css";
 
 const cx = classNames.bind(styles);
 
@@ -46,15 +46,24 @@ const WeatherMatePresenter: FC<IWeatherMatePresenterProps> = ({
         <LoadingPresenter />
       ) : (
         <>
-          <ProgressbarPresenter />
+          <div className={cx("weathermate-header")}>
+            <button className="swiper-prev" />
+            <h2 className={cx("weathermate-title")}>Weather Mate</h2>
+            <button className="swiper-next" />
+          </div>
 
+          <div className="progressbar"></div>
           <Swiper
             modules={[Pagination, Navigation]}
             navigation={{
               prevEl: ".swiper-prev",
               nextEl: ".swiper-next",
             }}
-            pagination={{ clickable: true }}
+            pagination={{
+              clickable: true,
+              type: "bullets",
+              el: ".progressbar",
+            }}
             spaceBetween={16}
             slidesPerView={1}
             className={cx("weathermate-swiper")}
@@ -62,13 +71,6 @@ const WeatherMatePresenter: FC<IWeatherMatePresenterProps> = ({
             {outfitList.map((outfit, index) => (
               <SwiperSlide key={index}>
                 <div className={cx("weathermate-container")}>
-                  <div className={cx("weathermate-header")}>
-                    <div className={cx("swiper-controls")}>
-                      <button className={cx("swiper-prev")} />
-                      <h2 className={cx("weathermate-title")}>Weather Mate</h2>
-                      <button className={cx("swiper-next")} />
-                    </div>
-                  </div>
                   <div className={cx("weathermate-items")}>
                     {outfit.items.map((item, itemIndex) => (
                       <div key={itemIndex} className={cx("weathermate-item")}>

@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./page.module.css";
 import SearchBarContainer from "@/containers/SearchBar/SearchBar.container";
 import WeatherInfoContainer from "@/containers/WeatherInfo/WeatherInfo.container";
-import WeatherMateBtnContainer from "@/containers/WeatherMateBtn/WeatherMateBtn.container";
+import WeatherMateBtnsContainer from "@/containers/WeatherMateBtns/WeatherMateBtns.container";
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ export default function Home() {
       <SearchBarContainer />
       <div className={cx("home-main")}>
         <WeatherInfoContainer />
-        <WeatherMateBtnContainer />
+        <WeatherMateBtnsContainer />
       </div>
     </div>
   );

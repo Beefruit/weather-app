@@ -1,0 +1,45 @@
+.swiper-prev,
+.swiper-next {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  border: none;
+  background: #00a2ce1a;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 화살표 모양 */
+.swiper-prev::after,
+.swiper-next::after {
+  content: "";
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-top: 2px solid #00a2ce;
+  border-right: 2px solid #00a2ce;
+  position: absolute;
+  top: 50%;
+}
+
+.swiper-prev::after {
+  transform: translate(-50%, -50%) rotate(-135deg);
+  left: 55%;
+}
+
+.swiper-next::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+  left: 45%;
+}
+
+.progressbar {
+  width: 100%;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #00a2ce !important;
+}
